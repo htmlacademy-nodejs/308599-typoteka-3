@@ -1,10 +1,14 @@
 'use strict';
 
+const fs = require(`fs`);
+const {ExitCode} = require(`../../constants`);
 const {
   getRandomInt,
   getRandomItem,
   getShuffleItem
 } = require(`../../utils`);
+
+const FILE_NAME = `mocks.json`;
 
 const TITLES = [
   `Ёлки. История деревьев`,
@@ -74,20 +78,36 @@ const createDate = () => {
 };
 
 const generateCards = (count) => {
-  Array(count)
-    .fill({})
-    .map(() => ({
-      title: getRandomItem(TITLES),
-      createdDate: createDate(),
-      announce: getShuffleItem(ANNOUNCES, AnnounceRestrict.MIN, AnnounceRestrict.MAX).join(``),
-      fullText: getShuffleItem(ANNOUNCES).join(``),
-      category: getShuffleItem(CATEGORIES, 1, getRandomInt(1, CATEGORIES.length - 1))
-    }));
+  return Array(count).fill({}).map(() => ({
+    title: getRandomItem(TITLES),
+    createdDate: createDate(),
+    announce: getShuffleItem(ANNOUNCES, AnnounceRestrict.MIN, AnnounceRestrict.MAX).join(``),
+    fullText: getShuffleItem(ANNOUNCES).join(``),
+    category: getShuffleItem(CATEGORIES, 1, getRandomInt(2, CATEGORIES.length - 1))
+  }));
 };
+
 
 module.exports = {
   name: `--generate`,
-  run() {
+  run(args) {
+    const [count] = args;
+    const countCards = Number.parseInt(count, 10) || CardRestrict.MIN;
+
+    if (countCards > CardRestrict.MAX) {
+      console.info(`Не больше ${CardRestrict.MAX} публикаций`);
+      process.exit(ExitCode.ERROR);
+    }
+
+    const content = JSON.stringify(generateCards(countCards));
+
+    fs.writeFile(FILE_NAME, content, (err) => {
+      if (err) {
+        return console.error(`Can't write data to file...`);
+      }
+
+      return console.info(`Operation success. File created.`);
+    });
 
   }
 };
