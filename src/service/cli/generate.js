@@ -73,7 +73,7 @@ const CardRestrict = {
 const createDate = () => {
   const currentDate = new Date();
   const lastDate = new Date().setMonth(currentDate.getMonth() - 3);
-  const randomDate = getRandomInt(+currentDate, lastDate);
+  const randomDate = getRandomInt(lastDate, +currentDate);
   return new Date(randomDate);
 };
 
