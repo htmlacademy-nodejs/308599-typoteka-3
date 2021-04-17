@@ -45,7 +45,7 @@ const generateCards = (count, {titles = [], categories = [], sentences = []}) =>
 const readContent = async (filePath) => {
   try {
     const content = await fs.readFile(filePath, `utf8`);
-    return content.split(`\n`);
+    return content.trim().split(`\n`);
   } catch (err) {
     console.log(chalk.red(err));
     return [];
