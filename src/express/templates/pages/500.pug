@@ -1,0 +1,13 @@
+extends ../layouts/main
+include ../utils/mixins
+
+block variables
+  - var logoErrorClass = 'header__logo--500'
+  - var wrapperClass = 'wrapper-color'
+
+block content
+  h1.visually-hidden Ошибка 500
+  +error({
+    text: 'Что-то пошло не так',
+    description: 'Причин может быть много: сервер не выдержал нагрузку или в коде ошибка. Попробуйте повторить попытку позже.'
+  })
