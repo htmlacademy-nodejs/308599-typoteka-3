@@ -27,8 +27,7 @@ html(lang='ru')
         | Ваш браузер не поддерживает javaScript. Сайт может отображаться некорректно.
     div(class= wrapperClass ? wrapperClass : 'wrapper')
       include ../includes/header
-      main(class= isMainPage ? 'main-page' : 'page-content')
-        block content
+      block content
       include ../includes/footer
     script(src='/js/vendor.js')
     script(src='/js/main.js')

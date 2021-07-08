@@ -6,8 +6,9 @@ block variables
   - var wrapperClass = 'wrapper-color'
 
 block content
-  h1.visually-hidden Ошибка 500
-  +error({
-    text: 'Что-то пошло не так',
-    description: 'Причин может быть много: сервер не выдержал нагрузку или в коде ошибка. Попробуйте повторить попытку позже.'
-  })
+  main.page-content
+    h1.visually-hidden Ошибка 500
+    +error({
+      text: 'Что-то пошло не так',
+      description: 'Причин может быть много: сервер не выдержал нагрузку или в коде ошибка. Попробуйте повторить попытку позже.'
+    })

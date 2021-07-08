@@ -6,16 +6,17 @@ block variables
   - var isResult = true
 
 block content
-  section.search-page
-    div(class= !isResult ? 'search-page__wrapper--empty' : null).search-page__wrapper
-      h1 Поиск
-      .search.search-page__form
-        form(action='#' method='get')
-          label
-            input(type='text' name='search' placeholder='Что ищем?')
-          button.search__button.button.button--transparent(type='submit') Найти
-      if (isResult)
-        +searchResult()
-        +searchResult()
-      if (!isResult)
-        p.search-page__empty Ничего не нашлось
+  main.page-content
+    section.search-page
+      div(class= !isResult ? 'search-page__wrapper--empty' : null).search-page__wrapper
+        h1 Поиск
+        .search.search-page__form
+          form(action='#' method='get')
+            label
+              input(type='text' name='search' placeholder='Что ищем?')
+            button.search__button.button.button--transparent(type='submit') Найти
+        if (isResult)
+          +searchResult()
+          +searchResult()
+        if (!isResult)
+          p.search-page__empty Ничего не нашлось

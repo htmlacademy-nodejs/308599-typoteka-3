@@ -7,7 +7,7 @@ mixin avatar()
 mixin searchResult()
   include ../includes/search-result
 
-mixin themes(data)
+mixin themes(data, extraClass)
   include ../includes/themes
 
 mixin hotList(data)
@@ -18,6 +18,9 @@ mixin commentsList(data)
 
 mixin card(data)
   include ../includes/card
+
+mixin comments(data)
+  include ../includes/comments
 
 mixin input(data)
   .form__field

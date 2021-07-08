@@ -6,5 +6,6 @@ block variables
   - var wrapperClass = 'wrapper-color'
 
 block content
-  h1.visually-hidden Ошибка 404
-  +error({text: 'Похоже ошиблись адресом'})
+  main.page-content
+    h1.visually-hidden Ошибка 404
+    +error({text: 'Похоже ошиблись адресом'})

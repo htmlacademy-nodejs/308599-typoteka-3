@@ -4,50 +4,51 @@ include ../utils/mixins
 block variables
 
 block content
-  h1.visually-hidden Регистрация
-  section
-    .popup.popup--registration.popup--anti
-      a.popup__button.button.button--popup-close(aria-label='Закрыть окно')
-        | Закрыть окно
-      h2.popup__title Регистрация
-      .popup__form.form.form--log-in
-        form(action='#' method='get')
-          +input({
-            type: 'email',
-            name: 'email',
-            placeholder: 'Электронная почта',
-            isRequired: true
-          })
-          +input({
-            type: 'text',
-            name: 'name',
-            placeholder: 'Имя',
-            isRequired: true
-          })
-          +input({
-            type: 'text',
-            name: 'surname',
-            placeholder: 'Фамилия',
-            isRequired: false
-          })
-          +input({
-            type: 'password',
-            name: 'password',
-            placeholder: 'Пароль',
-            isRequired: true
-          })
-          +input({
-            type: 'password',
-            name: 'repeat-password',
-            placeholder: 'Повтор пароля',
-            isRequired: true
-          })
-          +validation-error({
-            message: 'При регистрации произошли ошибки:',
-            errors: [
-                    'Пароль не может состоять из двух букв',
-                    'Фамилия не должна быть смешной'
-            ]
-          })
-          +avatar()
-          button.form__submit-btn.form__submit-btn--log-in.button.button--colored(type='submit') Зарегистрироваться
+  main.page-content
+    h1.visually-hidden Регистрация
+    section
+      .popup.popup--registration.popup--anti
+        a.popup__button.button.button--popup-close(aria-label='Закрыть окно')
+          | Закрыть окно
+        h2.popup__title Регистрация
+        .popup__form.form.form--log-in
+          form(action='#' method='get')
+            +input({
+              type: 'email',
+              name: 'email',
+              placeholder: 'Электронная почта',
+              isRequired: true
+            })
+            +input({
+              type: 'text',
+              name: 'name',
+              placeholder: 'Имя',
+              isRequired: true
+            })
+            +input({
+              type: 'text',
+              name: 'surname',
+              placeholder: 'Фамилия',
+              isRequired: false
+            })
+            +input({
+              type: 'password',
+              name: 'password',
+              placeholder: 'Пароль',
+              isRequired: true
+            })
+            +input({
+              type: 'password',
+              name: 'repeat-password',
+              placeholder: 'Повтор пароля',
+              isRequired: true
+            })
+            +validation-error({
+              message: 'При регистрации произошли ошибки:',
+              errors: [
+                      'Пароль не может состоять из двух букв',
+                      'Фамилия не должна быть смешной'
+              ]
+            })
+            +avatar()
+            button.form__submit-btn.form__submit-btn--log-in.button.button--colored(type='submit') Зарегистрироваться
