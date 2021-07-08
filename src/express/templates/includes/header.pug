@@ -1,5 +1,5 @@
 header(class= logoErrorClass ? 'header--error' : '').header
-  a.header__logo.logo(href='#' class= logoErrorClass ? logoErrorClass : null)
+  a.header__logo.logo(href='/' class= logoErrorClass ? logoErrorClass : null)
     if (!logoErrorClass)
       img.logo__image(src='img/icons/logo-image-only.svg' alt='логотип Тайпотеки')
       span.logo__name Типотека
@@ -9,7 +9,7 @@ header(class= logoErrorClass ? 'header--error' : '').header
     nav.header__nav
       ul.header__nav-list
         li.header__list-item
-          a.header__registration(href='#') Регистрация
+          a.header__registration(href='/register') Регистрация
         li.header__list-item
-          a.header__enter(href='#') Вход с паролем
-    a.header__search.button.button--search(href='#' aria-label='поиск по сайту')
+          a.header__enter(href='/login') Вход с паролем
+    a.header__search.button.button--search(href='/search' aria-label='поиск по сайту')
