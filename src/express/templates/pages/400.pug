@@ -1,0 +1,11 @@
+extends ../layouts/main
+include ../utils/mixins
+
+block variables
+  - var logoErrorClass = 'header__logo--404'
+  - var wrapperClass = 'wrapper-color'
+
+block content
+  main.page-content
+    h1.visually-hidden Ошибка 404
+    +error({text: 'Похоже ошиблись адресом'})

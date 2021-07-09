@@ -1,0 +1,6 @@
+ul.last__list
+  each item in data
+    li.last__list-item
+      img.last__list-image(src= item.src width='20' height='20' alt='Аватар пользователя')
+      b.last__list-name= item.name
+      a.last__list-link(href= item.href)= item.content

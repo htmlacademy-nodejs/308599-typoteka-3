@@ -1,0 +1,52 @@
+mixin error(data)
+  include ../includes/error
+
+mixin avatar()
+  include ../includes/avatar
+
+mixin searchResult()
+  include ../includes/search-result
+
+mixin themes(data, extraClass)
+  include ../includes/themes
+
+mixin hotList(data)
+  include ../includes/hot-list
+
+mixin commentsList(data)
+  include ../includes/comments-list
+
+mixin card(data)
+  include ../includes/card
+
+mixin comments(data)
+  include ../includes/comments
+
+mixin input(data)
+  .form__field
+    label
+      input(type= data.type name=data.name placeholder= data.placeholder required= data.isRequired ? '' : null)
+
+mixin validation-error(data)
+  .form__validation-error
+    p.form__error-message= data.message
+    ul.form__errors
+      each item in data.errors
+        li.form__error= item
+
+mixin pagination(data)
+  ul(class= data.extraClass ? data.extraClass : null).pagination
+    li
+      a.pagination__button.button.button--backwards.button--disabled(href='#' aria-label='Страница назад') Назад
+    li.pagination__item.pagination__item--active
+      a(href='#') 1
+    li.pagination__item
+      a(href='#') 2
+    li.pagination__item
+      a(href='#') 3
+    li.pagination__item
+      a(href='#') 4
+    li.pagination__item
+      a(href='#') 5
+    li
+      a.pagination__button.button.button--forward(href='#' aria-label='Страница вперед') Вперед

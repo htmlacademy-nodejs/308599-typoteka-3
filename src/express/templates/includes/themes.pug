@@ -1,0 +1,6 @@
+ul(class= extraClass ? extraClass : null).themes
+  each item in data
+    li.themes__item
+      a.themes__item-link(href= item.href)= item.name
+        | &nbsp;
+        sup= item.count

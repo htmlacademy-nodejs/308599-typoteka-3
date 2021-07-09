@@ -1,0 +1,6 @@
+ul.hot__list
+  each item in data
+    li.hot__list-item
+      a.hot__list-link(href= item.href)= item.content
+        | &nbsp;
+        sup.hot__link-sup= item.count

@@ -1,0 +1,75 @@
+extends ../layouts/main
+include ../utils/mixins
+
+block variables
+  - var isPicture = true
+  - var comments = []
+
+block content
+  main
+    h1.visually-hidden Пост
+    section.post__content
+      h2.visually-hidden Основное содержание
+      .post__wrapper
+        .post__head
+          a.post__backwards.button.button--backwards(href='#') Назад
+          time.post__date(datetime='2019-03-21T20:33') 21.03.2019, 20:33
+          h2.post__title.title.title--main AirPods в один клик
+          +themes([
+            {
+              href: "#",
+              name: 'Автомобили',
+              count: 88
+            },
+            {
+              href: "#",
+              name: 'Удаленная работа ',
+              count: 13
+            },
+            {
+              href: "#",
+              name: 'Бизнес',
+              count: 13
+            },
+            {
+              href: "#",
+              name: 'Путешествия',
+              count: 13
+            },
+            {
+              href: "#",
+              name: 'Дизайн и обустройство',
+              count: 88
+            },
+            {
+              href: "#",
+              name: 'Производство игрушек',
+              count: 22
+            },
+            {
+              href: "#",
+              name: 'UX & UI',
+              count: 8
+            }
+          ], 'post__themes')
+        if (isPicture)
+          .post__picture
+            img(src='/img/sea-fullsize@1x.jpg' alt='пейзаж море, скалы, пляж')
+          .post__text
+            h3 Бирюзовое доверие
+            p У Apple иногда попадаются интерфейсы, за которые создателей хочется сильно поругать — к примеру интерфейс публикации приложения в AppStore, для которого я уже неделю восстановливаю свой аккаунт разработчика.
+            p Или интерфейс подключения AirPods на макбуке. Чтобы переключить наушники между телефоном и компьютером, нужно сначала нажать на значок звука, затем дождаться, когда в списке устройств появятся наушники, потом нажать на них и дождаться, пока случится вся магия подключения. Иногда по загадочным причинам магия не случается, и операцию нужно повторить, выполняя все те же клики-ожидания-клики — бесит.
+      .post__wrapper.post__wrapper--comments
+        section.post__comments.comments
+          if (comments.length > 0)
+            h2.comments__title.title.title--middle Комментарии
+            +comments(comments)
+          else
+            h2.comments__title.title.title--middle Комментарии отсутствуют
+            .comments__footer.comments__footer--visitor
+              button.comments__button.button.button--colored(type='submit') Войти
+              .comments__registration
+                p.text.text--signature
+                  b.title.title--small Регистрация
+                  | Чтобы присоединиться к переписке нужно зарегистрироваться
+
