@@ -1,19 +1,23 @@
 'use strict';
 
 const chalk = require(`chalk`);
+const {nanoid} = require(`nanoid`);
 const fs = require(`fs`).promises;
-const {ExitCode} = require(`../../constants`);
+const {ExitCode, MAX_ID_LENGTH} = require(`../../constants`);
 const {
   getRandomInt,
   getRandomItem,
-  getShuffleItem
+  getShuffleItem,
+  shuffle
 } = require(`../../utils`);
 
 const FILE_NAME = `mocks.json`;
+const MAX_COMMENTS = 4;
 
 const FILE_TITLES_PATH = `./data/titles.txt`;
 const FILE_CATEGORIES_PATH = `./data/categories.txt`;
 const FILE_SENTENCES_PATH = `./data/sentences.txt`;
+const FILE_COMMENTS_PATH = `./data/comments.txt`;
 
 const SentenceRestrict = {
   MIN: 1,
@@ -32,13 +36,24 @@ const createDate = () => {
   return new Date(randomDate);
 };
 
-const generateCards = (count, {titles = [], categories = [], sentences = []}) => {
+const generateComments = (count, comments) => (
+  Array(count).fill({}).map(() => ({
+    id: nanoid(MAX_ID_LENGTH),
+    text: shuffle(comments)
+      .slice(0, getRandomInt(1, 3))
+      .join(` `),
+  }))
+);
+
+const generateCards = (count, {titles = [], categories = [], sentences = [], comments = []}) => {
   return Array(count).fill({}).map(() => ({
+    id: nanoid(MAX_ID_LENGTH),
     title: getRandomItem(titles),
     createdDate: createDate(),
     announce: getShuffleItem(sentences, SentenceRestrict.MIN, SentenceRestrict.MAX).join(``),
     fullText: getShuffleItem(sentences).join(``),
-    category: getShuffleItem(categories, 1, getRandomInt(2, categories.length - 1))
+    category: getShuffleItem(categories, 1, getRandomInt(2, categories.length - 1)),
+    comments: generateComments(getRandomInt(1, MAX_COMMENTS), comments),
   }));
 };
 
@@ -66,7 +81,8 @@ module.exports = {
     const titles = await readContent(FILE_TITLES_PATH);
     const categories = await readContent(FILE_CATEGORIES_PATH);
     const sentences = await readContent(FILE_SENTENCES_PATH);
-    const content = JSON.stringify(generateCards(countCards, {titles, categories, sentences}));
+    const comments = await readContent(FILE_COMMENTS_PATH);
+    const content = JSON.stringify(generateCards(countCards, {titles, categories, sentences, comments}));
 
     try {
       await fs.writeFile(FILE_NAME, content);
