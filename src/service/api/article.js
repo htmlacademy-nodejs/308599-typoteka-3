@@ -37,8 +37,9 @@ module.exports = (app, articleService) => {
       .json(article);
   });
 
-  route.put(`/:articleId`, articleExist(articleService), (req, res) => {
+  route.put(`/:articleId`, [articleValidator, articleExist(articleService)], (req, res) => {
     const {articleId} = req.params;
+
     const article = articleService.update(articleId, req.body);
 
     return res.status(HttpCode.OK)
@@ -62,16 +63,22 @@ module.exports = (app, articleService) => {
   route.post(`/:articleId/comments`, [articleExist(articleService), commentValidator], (req, res) => {
     const {articleId} = req.params;
     const comment = articleService.createComment(articleId, req.body);
-    return res.status(HttpCode.OK)
+    return res.status(HttpCode.CREATED)
       .json(comment);
   });
 
   route.delete(`/:articleId/comments/:commentId`, [articleExist(articleService), commentExist], (req, res) => {
-    const {articleId, commentId} = req.params;
-    const comment = articleService.dropComment(articleId, commentId);
+    const {article} = res.locals;
+    const {commentId} = req.params;
+    const deletedComment = articleService.dropComment(article, commentId);
+
+    if (!deletedComment) {
+      return res.status(HttpCode.NOT_FOUND)
+        .send(`Not found`);
+    }
 
     return res.status(HttpCode.OK)
-      .json(comment);
+      .json(deletedComment);
   });
 
 };

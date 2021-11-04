@@ -44,21 +44,28 @@ class ArticleService {
 
   createComment(articleId, comment) {
     const article = this.findOne(articleId);
-    article.comments.push({
+    const newComment = {
       id: nanoid(MAX_ID_LENGTH),
       text: comment.text
-    });
+    };
 
-    return article.comments;
+    article.comments.push(newComment);
+
+    return newComment;
   }
 
-  dropComment(articleId, commentId) {
-    const article = this.findOne(articleId);
-    let comments = article.comments;
-    comments = comments.filter((item) => item.id !== commentId);
-    this.update(articleId, article);
+  dropComment(article, commentId) {
+    const dropComment = article.comments
+      .find((item) => item.id === commentId);
 
-    return comments;
+    if (!dropComment) {
+      return null;
+    }
+
+    article.comments = article.comments
+      .filter((item) => item.id !== commentId);
+
+    return dropComment;
   }
 }
 
